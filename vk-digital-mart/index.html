@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VK Digital Mart – Latest Electronics</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">VK <span>Digital Mart</span></div>
+  <div class="nav-search">
+    <i class="fas fa-search"></i>
+    <input type="text" id="searchInput" placeholder="Search products…" oninput="searchProducts()"/>
+  </div>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#categories">Categories</a>
+    <a href="#about">About</a>
+    <button class="cart-btn" onclick="toggleCart()">
+      <i class="fas fa-shopping-cart"></i>
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+  <!-- <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div> -->
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#categories" onclick="toggleMenu()">Categories</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#" onclick="toggleCart(); toggleMenu()">Cart (<span id="mobileCartCount">0</span>)</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <!-- <div class="hero-badge">🔥 Limited Time Offer</div> -->
+    <h1 class="hero-title">Latest Electronics<br/><span>Collection</span></h1>
+    <p class="hero-sub">Up To <strong>40% OFF</strong> on premium tech — Phones, Laptops, Wearables & more.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Shop Now <i class="fas fa-arrow-right"></i></a>
+      <!-- <a href="#categories" class="btn-outline">Browse Categories</a> -->
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span>500+</span><p>Products</p></div>
+      <div class="stat"><span>50K+</span><p>Customers</p></div>
+      <div class="stat"><span>4.9★</span><p>Rating</p></div>
+    </div>
+  </div>
+  <!-- <div class="hero-visual">
+    <div class="floating-card card1"><i class="fas fa-mobile-alt"></i> iPhone 15</div>
+    <div class="floating-card card2"><i class="fas fa-laptop"></i> MacBook Pro</div>
+    <div class="floating-card card3"><i class="fas fa-headphones"></i> AirPods</div>
+    <div class="hero-glow"></div>
+    <div class="hero-emoji">🛍️</div>
+  </div> -->
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories-section" id="categories">
+  <div class="section-header">
+    <h2>Shop by Category</h2>
+    <p>Find exactly what you're looking for</p>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card" onclick="filterCategory('phones')">
+      <div class="cat-icon">📱</div>
+      <h3>Phones</h3>
+      <p>Latest smartphones</p>
+    </div>
+    <div class="cat-card" onclick="filterCategory('laptops')">
+      <div class="cat-icon">💻</div>
+      <h3>Laptops</h3>
+      <p>Powerful machines</p>
+    </div>
+    <div class="cat-card" onclick="filterCategory('headphones')">
+      <div class="cat-icon">🎧</div>
+      <h3>Headphones</h3>
+      <p>Crystal clear audio</p>
+    </div>
+    <div class="cat-card" onclick="filterCategory('smartwatch')">
+      <div class="cat-icon">⌚</div>
+      <h3>Smartwatch</h3>
+      <p>Wear the future</p>
+    </div>
+    <!-- <div class="cat-card" onclick="filterCategory('tablets')">
+      <div class="cat-icon">📟</div>
+      <h3>Tablets</h3>
+      <p>Work & entertainment</p>
+    </div>
+    <div class="cat-card" onclick="filterCategory('accessories')">
+      <div class="cat-icon">🔌</div>
+      <h3>Accessories</h3>
+      <p>Complete your setup</p>
+    </div> -->
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-header">
+    <h2>Our Products</h2>
+    <p>Handpicked for quality and performance</p>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+    <button class="filter-btn" onclick="filterCategory('phones')">Phones</button>
+    <button class="filter-btn" onclick="filterCategory('laptops')">Laptops</button>
+    <button class="filter-btn" onclick="filterCategory('headphones')">Headphones</button>
+    <button class="filter-btn" onclick="filterCategory('smartwatch')">Smartwatch</button>
+    <!-- <button class="filter-btn" onclick="filterCategory('tablets')">Tablets</button>
+    <button class="filter-btn" onclick="filterCategory('accessories')">Accessories</button> -->
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+  <div class="no-results" id="noResults" style="display:none">
+    <i class="fas fa-search"></i>
+    <p>No products found. Try a different search.</p>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<section class="features-strip">
+  <div class="feature"><i class="fas fa-truck"></i><div><h4>Free Delivery</h4><p>On orders above ₹999</p></div></div>
+  <div class="feature"><i class="fas fa-shield-alt"></i><div><h4>1 Year Warranty</h4><p>On all products</p></div></div>
+  <div class="feature"><i class="fas fa-undo"></i><div><h4>Easy Returns</h4><p>7-day return policy</p></div></div>
+  <!-- <div class="feature"><i class="fas fa-headset"></i><div><h4>24/7 Support</h4><p>We're always here</p></div></div> -->
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>About <span>VK Digital Mart</span></h2>
+      <p>We're your trusted destination for premium electronics at unbeatable prices. Since 2020, we've been connecting thousands of customers with the latest tech products — phones, laptops, wearables, and accessories.</p>
+      <p>Our mission is simple: bring you the best electronics with honest pricing, fast delivery, and real customer support.</p>
+      <div class="about-stats">
+        <div><strong>5+</strong><span>Years</span></div>
+        <div><strong>50K+</strong><span>Orders</span></div>
+        <div><strong>500+</strong><span>Brands</span></div>
+      </div>
+    </div>
+    <!-- <div class="about-visual">
+      <div class="about-card">
+        <i class="fas fa-award"></i>
+        <h4>Certified Store</h4>
+        <p>ISO 9001 Quality Certified</p>
+      </div>
+      <div class="about-card">
+        <i class="fas fa-star"></i>
+        <h4>Top Rated</h4>
+        <p>4.9/5 average rating</p>
+      </div>
+      <div class="about-card">
+        <i class="fas fa-lock"></i>
+        <h4>Secure Payments</h4>
+        <p>100% safe checkout</p>
+      </div>
+    </div> -->
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<!-- <section class="newsletter">
+  <div class="newsletter-content">
+    <h2>Get Exclusive Deals</h2>
+    <p>Subscribe to our newsletter and never miss a sale!</p>
+    <div class="newsletter-form">
+      <input type="email" id="emailInput" placeholder="Enter your email…"/>
+      <button onclick="subscribeNewsletter()">Subscribe <i class="fas fa-paper-plane"></i></button>
+    </div>
+    <p class="newsletter-note" id="newsletterMsg"></p>
+  </div>
+</section> -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>VK <span>Digital Mart</span></h3>
+      <p>Your one-stop shop for all electronics. Quality, trust, and the best deals — always.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About Us</a>
+    </div>
+    <!-- <div class="footer-links">
+      <h4>Support</h4>
+      <a href="#">FAQ</a>
+      <a href="#">Shipping Policy</a>
+      <a href="#">Returns</a>
+      <a href="#">Contact Us</a>
+    </div> -->
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <p><i class="fas fa-map-marker-alt"></i> Madurai, Tamil Nadu</p>
+      <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+      <p><i class="fas fa-envelope"></i> support@vkdigitalmart.in</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 VK Digital Mart. All rights reserved.</p>
+    <p>Made with ❤️ in India</p>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+    <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-cart">
+      <i class="fas fa-shopping-bag"></i>
+      <p>Your cart is empty</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span>Total:</span>
+      <strong id="cartTotal">₹0</strong>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout <i class="fas fa-arrow-right"></i></button>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="product-modal" id="productModal">
+  <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/products.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
